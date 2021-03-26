@@ -1,0 +1,106 @@
+body {
+    font-size:14px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+ul {
+    font-size:14;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    list-style-type: none;
+}
+
+ul li {
+    display: block;
+}
+li {
+    margin: 3px auto;
+}
+
+.item {
+    font-size:16px;
+    margin-top:5px;
+    margin-bottom:5px;
+    margin-left: 25px;
+}
+
+
+.item.file {
+    font-size:14px;
+    font-style:italic;
+}
+.item.file::before, .item.parent_folder::before {
+    content: "";
+    display:inline-block;
+    width:15px;
+    height:15px;
+    margin-right:5px;
+}
+.item.file::before {
+    background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20512%20512%22%3E%3Cpath%20d%3D%22M437.33%20128H330.67c-5.9%200-10.67-4.8-10.67-10.67V10.67C320%204.77%20315.22%200%20309.33%200H96C78.36%200%2064%2014.36%2064%2032v448c0%2017.64%2014.36%2032%2032%2032h320c17.64%200%2032-14.36%2032-32V138.67c0-5.9-4.78-10.67-10.67-10.67zm-10.66%20352c0%205.87-4.78%2010.67-10.67%2010.67H96c-5.89%200-10.67-4.8-10.67-10.67V32c0-5.87%204.78-10.67%2010.67-10.67h202.67v96c0%2017.65%2014.35%2032%2032%2032h96V480z%22%2F%3E%3Cpath%20d%3D%22M444.86%20131.14l-128-128a10.67%2010.67%200%2000-15.08%2015.08l128%20128a10.72%2010.72%200%200015.08%200%2010.67%2010.67%200%20000-15.08z%22%2F%3E%3C%2Fsvg%3E");   
+}
+.item.parent_folder::before {
+    background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20512%20512%22%3E%3Cpath%20d%3D%22M448.92%20118.26H286.87c-6.58%200-13-2.7-17.44-7.3L218.86%2057.7c-12.15-12.11-28.78-18.44-45.62-18.34H63.08A63.16%2063.16%200%20000%20102.44v307.12a63.16%2063.16%200%200063.08%2063.09h386.13c34.76-.16%2062.95-28.6%2062.79-63.28V181.34a63.16%2063.16%200%2000-63.08-63.08zm24.5%20291.19a24.52%2024.52%200%2001-24.31%2024.61H63.08c-13.5%200-24.5-11-24.5-24.5V102.44c0-13.5%2011-24.5%2024.5-24.52h111.3c6.44%200%2012.7%202.56%2016.9%206.73l50.29%2053.01a63.38%2063.38%200%200045.3%2019.18h162.05c13.5%200%2024.5%2011%2024.5%2024.5v228.1z%22%2F%3E%3C%2Fsvg%3E");
+}
+.item.parent_folder.symlink_folder {
+    font-weight: bold;
+}  
+.item.parent_folder.symlink_folder::before {
+    background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20512%20512%22%3E%3Cpath%20d%3D%22M448.92%20118.26H286.87c-6.58%200-13-2.7-17.44-7.3L218.86%2057.7c-12.15-12.11-28.78-18.44-45.62-18.34H63.08A63.16%2063.16%200%20000%20102.44v307.12a63.16%2063.16%200%200063.08%2063.09h386.13c34.76-.16%2062.95-28.6%2062.79-63.28V181.34a63.16%2063.16%200%2000-63.08-63.08zm24.5%20291.19a24.52%2024.52%200%2001-24.31%2024.61H63.08c-13.5%200-24.5-11-24.5-24.5V102.44c0-13.5%2011-24.5%2024.5-24.52h111.3c6.44%200%2012.7%202.56%2016.9%206.73l50.29%2053.01a63.38%2063.38%200%200045.3%2019.18h162.05c13.5%200%2024.5%2011%2024.5%2024.5v228.1z%22%2F%3E%3C%2Fsvg%3E"), 
+    url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20512%20512%22%3E%3Cpath%20d%3D%22M212.26%20390.24l-60.33%2060.33a63.97%2063.97%200%2001-90.5%200c-25-24.99-25-65.5-.01-90.49L182.1%20239.4c24.99-25%2065.5-25%2090.49%200a21.33%2021.33%200%200030.17-30.17c-41.65-41.66-109.18-41.66-150.83%200L31.25%20329.9c-41.66%2041.65-41.66%20109.18%200%20150.83%2041.65%2041.68%20109.17%2041.68%20150.85%200l60.33-60.33a21.33%2021.33%200%2010-30.17-30.17z%22%2F%3E%3Cpath%20d%3D%22M480.75%2031.24c-41.65-41.65-109.2-41.65-150.85%200l-72.39%2072.38a21.33%2021.33%200%200030.17%2030.17l72.39-72.38a64%2064%200%200190.51%2090.5L317.85%20284.63c-25%2024.99-65.5%2024.99-90.5%200a21.33%2021.33%200%2000-30.17%2030.17c41.66%2041.65%20109.18%2041.65%20150.84%200l132.73-132.74c41.65-41.65%2041.65-109.18%200-150.83z%22%2F%3E%3C%2Fsvg%3E");
+    background-size: cover, 60%;
+    background-position: center, center;
+    background-repeat: no-repeat, no-repeat;
+
+}
+
+.parent_folder {
+    position:relative;
+    border-left: 2px solid black;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 10px;
+}
+
+
+
+/*Form Page*/
+.page_body {
+    width:900px;
+    margin:0 auto;
+    overflow-x: auto;
+}
+.form_page {
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form input {
+    font-size: 14px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    width: 400px;
+    border: none;
+    background-color:cornsilk;
+    padding: 10px;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+.form input:focus {
+    outline: none;
+}
+.form button {
+    padding: 10px;
+    border:none;
+    border-radius: 5px;
+    border-color:transparent;
+    transition: box-shadow 1s;
+}
+.form button:hover {
+    box-shadow: 0px 10px 10px rgba(6, 31, 21, 0.4);
+    
+}
+.form button:focus {
+    outline:none;
+    
+}
+
