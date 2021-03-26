@@ -1,6 +1,12 @@
 <?php
-
-function getAllFolders2($path = "")
+/**
+ * Function returns array with folders ierarchy, folder name = array keys, and if folder have subdirectories 
+ * then this will array corresponding to the folders key.
+ *
+ * @param string $path Path where recursive array building begins.
+ * @return mixed array of folders and files in provided paths
+ */
+function getAllFolders($path = "")
 {
     $foldersToTraverse = [];
     $fileDirlist = [];
@@ -42,7 +48,7 @@ function getAllFolders2($path = "")
     $returnResult = $fileDirlist;
 
     foreach ($foldersToTraverse as $folders) {
-        $returnResult[basename($folders)] = getAllFolders2($folders);
+        $returnResult[basename($folders)] = getAllFolders($folders);
         if (empty($returnResult[basename($folders)])) {
             $returnResult[basename($folders)] = "folder";
         }
@@ -58,7 +64,14 @@ function getAllFolders2($path = "")
 
     return $returnResult;
 }
-
+/**
+ * Function rearranges array returned by function getAllFolders (add <div> with classes before every element
+ * -> item before every element, parent_folder before every folder (empty included), symlink_folder before 
+ * every folder with symlink);
+ *
+ * @param array $array Array returned by getAllFolders function;
+ * @return void returns array inserted in HTML markup.
+ */
 function rearrangeArray($array) 
 {
     $returnValue = "<div class='item'> ";
