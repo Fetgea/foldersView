@@ -23,6 +23,8 @@ function getAllFoldersWrapper($path)
 
 function getAllFolders($rootPath, $path = "")
 {
+    $directory = dirname(__FILE__);
+    ini_set("open_basedir", $directory);
     $foldersToTraverse = [];
     $fileDirlist = [];
     $path = trim($path);
@@ -31,7 +33,7 @@ function getAllFolders($rootPath, $path = "")
     } else {
         $currentPath = rtrim($path, "/");
     }
-    if (!is_dir($currentPath)) {
+    if (!@is_dir($currentPath)) {
         return false;
     }
     $symlinks = [];
