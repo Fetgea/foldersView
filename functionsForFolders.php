@@ -37,11 +37,10 @@ function getAllFolders($path = "")
                 //echo $realPath;
                 if (!strpos($realPath, $currentPath)) {
                     unset($symlinks[$fileDir]);
-                    unset ($foldersToTraverse[$key]);
-                    unset ($fileDirlist[$key]);
+                    unset($foldersToTraverse[$key]);
+                    unset($fileDirlist[$key]);
                 }
             }
-            
         }
     }
     $fileDirlist = array_flip($fileDirlist);
@@ -77,7 +76,7 @@ function rearrangeArray($array)
     $returnValue = "<div class='item'> ";
     foreach ($array as $key => $arrayValue) {
         if (is_array($arrayValue)) {
-            if (isset ($arrayValue["symlinkFolder"]) && $arrayValue["symlinkFolder"] === true) {
+            if (isset($arrayValue["symlinkFolder"]) && $arrayValue["symlinkFolder"] === true) {
                 unset($arrayValue["symlinkFolder"]);
                 $returnValue .= "<div class='item parent_folder symlink_folder'>" . $key;
             } else {

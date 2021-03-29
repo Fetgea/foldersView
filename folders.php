@@ -1,14 +1,13 @@
 <?php
 
-
-require ("./functionsForFolders.php");
+require "./functionsForFolders.php";
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET["foldersPath"])) {
     $folderPath = getAllFolders($_GET["foldersPath"]);
     if ($folderPath) {
         $formattedPath = rearrangeArray($folderPath);
     } else {
-        $formattedPath ="Error reading folder path";
+        $formattedPath = "Error reading folder path";
     }    
 } 
 ?>
@@ -28,8 +27,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET["foldersPath"])) {
                 <button type="submit">Отправить</button>
             </label>
         </form> 
-    </div>   
-    <h1> Содержимое папки <?=htmlspecialchars($_GET["foldersPath"] ?? "C:/sites")?></h1>
+    </div>
+    <?php if (isset($formattedPath)) :?>
+    <h1> Содержимое папки <?=htmlspecialchars($_GET["foldersPath"] ?? "")?></h1>
 
     <div class="folder_content">
         <?php 
@@ -38,5 +38,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET["foldersPath"])) {
         }
         ?>
     </div>
+    <?php endif;?>
 </body>
 </html>
