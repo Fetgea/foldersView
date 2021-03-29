@@ -9,7 +9,7 @@
 - functionForFolders.php - содержит основные функции для прохода по папкам и последующего вывода
 - folders.php - фронтэнд для работы с функциями, выдает html страницу с формой ввода, в которую можно указать целевую папку.
 
-## Функции реализованные в файле functioForFolders.php
+## Функции реализованные в файле functionsForFolders.php
 - getAllFolders
 - getAllFoldersWrapper
 - rearrangeArray
