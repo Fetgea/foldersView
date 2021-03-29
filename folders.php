@@ -3,7 +3,7 @@
 require "./functionsForFolders.php";
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET["foldersPath"])) {
-    $folderPath = getAllFolders($_GET["foldersPath"]);
+    $folderPath = getAllFoldersWrapper($_GET["foldersPath"]);
     if ($folderPath) {
         $formattedPath = rearrangeArray($folderPath);
     } else {

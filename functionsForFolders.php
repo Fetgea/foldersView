@@ -1,12 +1,27 @@
 <?php
+
 /**
  * Function returns array with folders ierarchy, folder name = array keys, and if folder have subdirectories 
  * then this will array corresponding to the folders key.
  *
+ * @param string $path Path where recursive array building begins
+ * @return array array of folders and files in provided paths 
+ */
+function getAllFoldersWrapper($path)
+{
+    $result = getAllFolders($path, $path);
+    return $result;
+}
+
+/**
+ * Function returns array with folders ierarchy, folder name = array keys, and if folder have subdirectories 
+ * then this will array corresponding to the folders key.
+ * @param string $rootPath root path of search. For symlink folders filtering
  * @param string $path Path where recursive array building begins.
  * @return mixed array of folders and files in provided paths
  */
-function getAllFolders($path = "")
+
+function getAllFolders($rootPath, $path = "")
 {
     $foldersToTraverse = [];
     $fileDirlist = [];
@@ -29,16 +44,13 @@ function getAllFolders($path = "")
         if (is_dir($currentPath . "/" . $fileDir)) {
             $foldersToTraverse[$key] = $currentPath . "/" . $fileDir;
             $fileInfo = @filetype($currentPath . "/" . $fileDir);
-            if (is_link($currentPath . "/" . $fileDir)) {
-                $symlinks[$fileDir] = true;
-            } elseif ($fileInfo === "unknown") {
+            if (is_link($currentPath . "/" . $fileDir) || $fileInfo === "unknown") {
                 $symlinks[$fileDir] = true;
                 $realPath = realpath($currentPath . "/" . $fileDir);
-                //echo $realPath;
-                if (!strpos($realPath, $currentPath)) {
-                    unset($symlinks[$fileDir]);
+                $realPathToLower = strtolower(str_replace('/', DIRECTORY_SEPARATOR, $realPath));
+                $rootPathToLower = strtolower($rootPath);
+                if (strpos($realPathToLower, $rootPathToLower) === false) {
                     unset($foldersToTraverse[$key]);
-                    unset($fileDirlist[$key]);
                 }
             }
         }
@@ -46,21 +58,19 @@ function getAllFolders($path = "")
     $fileDirlist = array_flip($fileDirlist);
     $returnResult = $fileDirlist;
 
-    foreach ($foldersToTraverse as $folders) {
-        $returnResult[basename($folders)] = getAllFolders($folders);
+    foreach ($foldersToTraverse as $key => $folders) {
+        $returnResult[basename($folders)] = getAllFolders($rootPath,$folders);
         if (empty($returnResult[basename($folders)])) {
             $returnResult[basename($folders)] = "folder";
         }
-        if (isset($symlinks[basename($folders)])) {
-            if (is_array($returnResult[basename($folders)])) {
-                $returnResult[basename($folders)]['symlinkFolder'] = true;
-                echo $folders;
-            } else {
-                $returnResult[basename($folders)] = ["symlinkFolder" => true];
+        if (!empty($symlinks)) {
+            foreach ($symlinks as $key => $symlink) {
+                if (isset($returnResult[$key])) {
+                    $returnResult[$key] = ["symlinkFolder" => true];
+                } 
             }
         }
     }
-
     return $returnResult;
 }
 /**
