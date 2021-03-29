@@ -43,7 +43,7 @@ function getAllFolders($rootPath, $path = "")
     }
     $fileDirlist = array_diff($fileDirlist, [".", ".."]);
     foreach ($fileDirlist as $key => &$fileDir) {
-        if (is_dir($currentPath . "/" . $fileDir)) {
+        if (@is_dir($currentPath . "/" . $fileDir)) {
             $foldersToTraverse[$key] = $currentPath . "/" . $fileDir;
             $fileInfo = @filetype($currentPath . "/" . $fileDir);
             if (is_link($currentPath . "/" . $fileDir) || $fileInfo === "unknown") {
